@@ -2,7 +2,7 @@ import {uiIcon} from './ui-icons.js';
 import {phoneShowcase} from './phone-preview.js';
 // Public product pages. Examples describe the current browser-based edition.
 export const PUBLIC_PAGES = ['welcome','content-creators','for-businesses','for-ecommerce','agencies','pricing'];
-const platformFiles={Instagram:'instagram',TikTok:'tiktok',YouTube:'youtube',Facebook:'facebook',LinkedIn:'linkedin',Pinterest:'pinterest',X:'x',Bluesky:'bluesky',Twitch:'twitch'};
+const platformFiles={Instagram:'instagram',TikTok:'tiktok',YouTube:'youtube',Facebook:'facebook',LinkedIn:'linkedin',Pinterest:'pinterest',X:'x'};
 const mark=name=>`<img src="/assets/platforms/${platformFiles[name]}.svg" width="24" height="24" alt="">`;
 const cta=(label='Start preparing content')=>`<a class="m-button" href="/workspace#media" target="_top">${label}</a>`;
 const check='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>';
