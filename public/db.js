@@ -19,3 +19,5 @@ export async function importLegacy(){
  try{for(const store of STORES){if(!legacy.objectStoreNames.contains(store))continue;const records=await new Promise((resolve,reject)=>{const tx=legacy.transaction(store,'readonly');const req=tx.objectStore(store).getAll();req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});for(const record of records){if(!await get(store,record.id)){await put(store,record);count++;}}}}finally{legacy.close();}
  return count;
 }
+export async function exportRecords(){const result={};for(const store of STORES)result[store]=await all(store);return result;}
+export async function restoreRecords(records){const database=await openDB();return new Promise((resolve,reject)=>{const tx=database.transaction(STORES,'readwrite');let imported=0;for(const name of STORES){const object=tx.objectStore(name);for(const value of records[name]||[]){const read=object.get(value.id);read.onsuccess=()=>{if(!read.result){object.put(value);imported++;}};}}tx.oncomplete=()=>resolve(imported);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Restore failed. Existing records were preserved.'));});}

@@ -81,3 +81,14 @@ See [DESIGN.md](DESIGN.md), [SECURITY.md](SECURITY.md) and `public/assets/platfo
 ## Ownership
 
 Copyright 2026 Corebridge. All rights reserved. Third-party fonts and marks retain their respective licenses. No open-source license is granted for Drop.
+
+## Version 0.3
+
+- Screenshot-inspired original channel-format previews, integration availability strip and expandable FAQ on the homepage.
+- A three-step workflow builder: library source, preparation destinations, output formats. Saved workflows export a real ZIP content kit with prepared files and a manual publication manifest.
+- Full browser workspace backup ZIP, including original media. Restore validates paths, checksums, record identifiers and media decodability before an atomic IndexedDB merge. Existing records are not overwritten. Archives are not encrypted and are limited to 500 MB.
+- Multiple saved preparation versions, exact draft links and navigation autosave for edited drafts.
+- Video export checks cancellation before setup and during frame composition.
+- Direct Google sign-in is still a configuration/hosting dependency; see GOOGLE_SIGN_IN.md. Current managed sign-in remains active.
+
+The checks now include ZIP binary round-trips, damaged archive rejection, backup metadata validation, workflow validation, all page templates, original reference-inspired homepage sections, and the earlier auth/domain checks. ZIP output was also checked with Python's independent zipfile reader.

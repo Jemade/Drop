@@ -41,3 +41,9 @@ Syntax and domain checks pass. Full browser layout and export QA were unavailabl
 ## Third edition: demonstration and account access
 
 Client source moved from dist/ to public/; dist/ is now generated Worker output. All previous brand assets remain under public/. Platform marks use sourced SVG paths and official-domain favicons, with provenance in public/assets/platforms/SOURCES.txt. The 30-second MP4 is a deliberately labelled illustrated product walkthrough, not a customer screen recording. Homepage, sidebar and workspace footer link Powered by Corebridge to https://corebridge.co.zw.
+
+## Fourth edition: reference-inspired product explanations
+
+The eight user-provided Repurpose screenshots informed the source/destination selection pattern, format comparison, capability explanations and FAQ interaction. Drop uses its own layout, typography, brand, photography and wording. No screenshot graphics, testimonials, popularity counts, partner claims or platform UI artwork were copied.
+
+The workflow builder supports the available local preparation path. Its social-source choice explains the pending integration rather than implying an active import. The homepage's format previews are labelled examples and do not show invented engagement counts.

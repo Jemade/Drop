@@ -27,3 +27,9 @@ CSP limits scripts, network connections, fonts and media to the current origin o
 ## Remaining release gates
 
 Before commercial onboarding: shared authenticated data storage, tenant authorization, encrypted provider tokens, abuse limits, audit logs, durable processing jobs, verified OAuth integrations and complete browser E2E testing. Current tests verify handler behavior and domain invariants; they do not certify the whole platform as secure.
+
+## Workspace archives
+
+Drop uses uncompressed ZIP STORE entries with CRC32 checksums. Restore rejects path traversal, duplicate entry names, unsupported compression, bad checksums, oversized files and invalid record IDs. Media is decoded through the browser before writing. Validated records merge into the current account in a single IndexedDB transaction. Existing keys are skipped. The ZIP is a portable plaintext copy and should be stored privately.
+
+Direct Google login has not been enabled without a configured provider. See GOOGLE_SIGN_IN.md for the required identity/session work.
