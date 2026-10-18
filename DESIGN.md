@@ -52,3 +52,32 @@ The workflow builder supports the available local preparation path. Its social-s
 ## Typography refinement
 
 Reference: https://repurpose.io/ (source inspected 18 October 2026). Uses Poppins for headings and IBM Plex Sans for body text. Drop now self-hosts these open-license fonts, including their licenses. The homepage follows the reference hero scale of 56px desktop, 48px tablet and 40px mobile, with 18px body copy (16px mobile). Workspace navigation uses 14px, controls 15–16px, secondary copy 13px and page titles 28–34px. Original Drop identity and layouts are retained. The dedicated typography stylesheet loads last to override earlier compact type rules.
+
+
+## Public website rebuild, 18 October 2026
+
+The homepage now states Drop's purpose directly: adapt videos and photos for social channels, export the files and plan publication. Original imagery, restrained blue, navy text, generous white space and a visual source-to-format example replace the previous abstract editorial collage. Poppins and IBM Plex Sans remain self-hosted. Workspace functionality is retained.
+
+Reference review:
+
+- https://repurpose.io/: direct product promise, visible product demonstration, destination marks, features, pricing and FAQ progression. Drop uses an original source-file and output-format composition, with real photography and no borrowed graphics or social proof.
+- https://repurpose.io/content-creators/: audience-specific benefit and visual examples. Drop focuses on recorded footage, crop variants, manual captions and a content plan.
+- https://repurpose.io/for-businesses/: connects content work to business visibility. Drop explains practical product, service and behind-the-scenes posts.
+- https://repurpose.io/for-ecommerce/: applies the product story to product content. Drop shows one product photo adapted for multiple formats, without claiming store integrations.
+- https://repurpose.io/agencies/: explains agency use cases and workflow value. Drop describes personal preparation and ZIP handover; shared team features are explicitly unavailable.
+- https://repurpose.io/pricing/: clear choices, feature inclusions and common purchase questions. Drop presents its actual current free preview and clearly labels future connected capabilities. No invented prices, trial duration, customer metrics or billing UI.
+
+All six reference pages were read, including source HTML and image references. The two supplied navigation and creator screenshots informed spacing and hierarchy. The reference business/ecommerce phone illustration and agency composition were inspected for their communication pattern, not reused.
+
+Public routes: /, /content-creators, /for-businesses, /for-ecommerce, /agencies, /pricing. All load without entering the workspace sign-in flow. CTAs enter the existing protected /workspace route. A working mobile menu, native FAQ disclosure controls and interactive format previews support exploration. The existing captioned, illustrated video demonstration remains available.
+
+Additional licensed Unsplash photography, downloaded and self-hosted:
+- Creator studio: image CDN ID photo-1664277497087-51787d2b9d15, found via https://unsplash.com/s/photos/youtube-creator.
+- Shop owner: image CDN ID photo-1658314756218-72907d818aa7, found via https://unsplash.com/s/photos/shop-owner.
+- Product example: image CDN ID photo-1542291026-7eec264c27ff.
+- Team example: image CDN ID photo-1519389950473-47ba0277781c.
+- Download source for each: https://images.unsplash.com/<image-ID>?auto=format&fit=crop&w=1200&q=82&fm=jpg (shop and product use w=1000).
+
+Photos are illustrative; no depicted person or business is claimed as a customer or endorser. Social platform marks identify intended formats, not connected integrations or partners.
+
+QA: syntax checks, route rendering, public route HTTP behavior and output asset checks. Full browser visual verification is unavailable in this environment.
