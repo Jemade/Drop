@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cropRect,validateTrim,engagement,researchSummary,icsEvent,safeURL,escapeHTML,validateReference,CHANNELS} from '../dist/domain.js';
+import {cropRect,validateTrim,engagement,researchSummary,icsEvent,safeURL,escapeHTML,validateReference,CHANNELS} from '../public/domain.js';
 test('portrait crop preserves centre and allows subject repositioning',()=>{const centre=cropRect(1920,1080,720,1280);assert.equal(centre[3],1080);assert.equal(centre[2],607.5);assert.equal(centre[0],656.25);assert.equal(cropRect(1920,1080,720,1280,0)[0],0);assert.equal(cropRect(1920,1080,720,1280,1)[0],1312.5);});
 test('trims reject empty, negative, inverted and out-of-bounds clips',()=>{assert.equal(validateTrim(0,10,10),true);for(const [a,b] of [[0,0],[-1,2],[4,2],[0,11],[NaN,2]])assert.equal(validateTrim(a,b,10),false);});
 test('research requires complete metrics and ranks entered observations',()=>{const records=[{title:'A',followers:'1000',reactions:'30',comments:'10'},{title:'B',followers:'100',reactions:'6',comments:'2'},{title:'Unknown',followers:'',reactions:'',comments:''}];assert.equal(engagement(records[0]),4);assert.equal(engagement(records[2]),null);assert.equal(engagement({followers:'10',reactions:'',comments:'0'}),null);const summary=researchSummary(records);assert.equal(summary.measured,2);assert.equal(summary.baseline,6);assert.equal(summary.ranked[0].title,'B');});

@@ -37,3 +37,7 @@ The homepage now has its own public header and footer, a typographic hero with p
 The workspace has a white sidebar, cobalt selected navigation, compact tabs, a photographic media intro, unboxed counts, restrained status colours and revised form styling. IndexedDB keys and storage version are unchanged, preserving existing user data.
 
 Syntax and domain checks pass. Full browser layout and export QA were unavailable in the managed authoring environment.
+
+## Third edition: demonstration and account access
+
+Client source moved from dist/ to public/; dist/ is now generated Worker output. All previous brand assets remain under public/. Platform marks use sourced SVG paths and official-domain favicons, with provenance in public/assets/platforms/SOURCES.txt. The 30-second MP4 is a deliberately labelled illustrated product walkthrough, not a customer screen recording. Homepage, sidebar and workspace footer link Powered by Corebridge to https://corebridge.co.zw.

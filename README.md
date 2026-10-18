@@ -1,71 +1,83 @@
 # Drop
 
-Content, carried further. An independent product by Corebridge.
+Content preparation, research and publication planning. Powered by [Corebridge](https://corebridge.co.zw).
 
-## Run
+## Version 0.2
 
-Requires Python 3 for serving static files. No package installation or API key is needed.
+- Original vector identity, self-hosted fonts, real photography and responsive workspace.
+- Captioned 30-second illustrated product demonstration on the homepage, with an example-photo flow you can try.
+- Managed Sign in with ChatGPT, server-protected workspace route, verified session endpoint and sign-out.
+- Browser media and records separated by verified account. An explicit settings action imports the earlier local preview's data on your own device without overwriting current records.
+- Proper platform marks for all 16 integration destinations.
+- Media library, crop/trim/manual captions/branding, PNG and browser-video export, drafts, personal approvals, manually sourced research, reusable presets and calendar reminders.
+
+## Run locally
+
+Node 20+ is required. No npm dependencies or API keys are needed.
 
 ```sh
-python3 -m http.server 8000 --directory dist
+npm start
 ```
 
-Open http://localhost:8000. Use a recent desktop Chrome or Firefox for video exports. Node 20+ runs the checks:
+Open http://127.0.0.1:8000. The development server binds only to loopback and provides an explicitly labelled development identity. Never expose that server publicly. Production authentication is provided by Sites dispatch, not this local server.
 
 ```sh
 npm run check
 npm test
+npm run build
+node scripts/validate-artifact.mjs
 ```
 
-## What works in v0.1
+## Hosted identity and security boundary
 
-- Upload real video, image and audio files (250 MB each), with metadata and thumbnails.
-- Keep media and records in IndexedDB across page reloads on the same origin/browser.
-- Search and filter media, rename files, download originals and delete files with confirmation.
-- Prepare portrait, square and landscape crops, position a subject, trim a video, add brand text and timed manual captions.
-- Download prepared PNG images or browser-recorded video, usually WebM. Video recording uses canvas.captureStream and MediaRecorder, including a Web Audio stream. Exports run in real time and require keeping the tab visible. Output codec varies by browser; it is not guaranteed MP4 or accepted by every destination.
-- Save preparation drafts, submit to a personal review checklist and mark approved.
-- Store source references, observations and manually entered public metrics. Complete metric records produce reaction/comment engagement rates and a median; missing fields are not assumed to be zero.
-- Turn a reference into an editable brief and a publication plan.
-- Export UTC calendar reminders (.ics), mark posts published manually and export workspace notes as JSON.
-- Create reusable preparation presets and save default brand settings.
-- Responsive landing page, workspace navigation and honest empty states.
+Production runs as a Cloudflare Worker behind Sites dispatch. The hosting platform owns sign-in, sign-out, session cookies and verification. Drop consumes the verified `oai-authenticated-user-id` and email headers server-side. These headers are not a standalone authentication mechanism; deploying this Worker publicly outside that trusted dispatch boundary requires a real identity verifier.
 
-## Deliberate limitations
+- `/workspace` redirects anonymous requests to managed sign-in.
+- `/api/session` returns 401 without a complete verified identity and is never cached.
+- Sign-in uses top-level navigation; there are no custom password fields, client bearer tokens or tokens in localStorage.
+- Workspace rendering and IndexedDB initialization require a verified session. Each account uses a separate database name.
+- CSP, nosniff, referrer and permissions policies are applied. The Worker exposes no state-changing API routes; other methods receive 405.
+- Site audience remains owner-private. This update does not open the site to the public or invite customers.
 
-This release is a personal browser workspace, not a commercial multi-tenant service. It does not connect social accounts, publish posts, perform automatic competitor monitoring, transcribe speech, take payments or invite team members. Calendar entries are reminders, not server jobs. All screenshot destinations are present as an integration roadmap with explicit availability labels. No passwords or access tokens are collected.
+Authentication protects access to the hosted workspace. Media remains local browser data, not encrypted cloud storage. Anyone with control of the same operating-system/browser profile may inspect local files. Do not use shared browser profiles for confidential client media.
 
-Files are not sent to a server. Clearing browser site data removes them. Storage persistence is requested but is not guaranteed. Keep original files backed up. JSON notes export excludes media and does not yet have an import feature. Data does not sync between localhost, the hosted preview or other devices.
+## Working personal flows
 
-Research uses user-provided information, not scraped or invented analytics. Engagement here means (reactions + comments) / followers * 100. It cannot reveal a competitor's private reach, retention, conversions or paid distribution. Compare similar platforms, observation periods and audiences. A content hypothesis is not a causal claim or promise of virality.
+1. Upload a real image, video or audio file, up to 250 MB each. Metadata and thumbnails are stored in IndexedDB.
+2. Prepare portrait, square or landscape versions. Reposition a crop, trim video, add brand text and manually timed captions.
+3. Export PNG images or browser-recorded video (usually WebM; codec depends on browser). Video exports run in real time and require keeping the tab visible.
+4. Save drafts, send to your own review checklist and mark approved.
+5. Save source references and observations; optionally enter public metrics. Complete entries produce reaction/comment engagement comparisons. Missing metrics are not treated as zero.
+6. Turn references into original briefs, save publication plans and export .ics reminders.
+7. Reuse preparation presets, change brand defaults, download originals and export workspace notes.
 
-## Architecture
+The homepage demonstration is a labelled illustrated walkthrough made from product layouts and example photography, not a recording of customer activity. It shows manual publication planning. Regenerate it with `python3 tools/generate_demo.py` (Pillow and FFmpeg required).
 
-- `dist/app.js`: route rendering, forms and workspace interactions.
-- `dist/db.js`: IndexedDB repository layer; commits awaited before reporting saves.
-- `dist/media.js`: decode, thumbnail, crop, caption composition and browser export.
-- `dist/domain.js`: pure validation, benchmark calculations and calendar serialization.
-- `dist/styles.css`: original responsive design system. No remote runtime dependencies. Fonts and editorial photography are self-hosted; see DESIGN.md for sources and licenses.
-- `tests/domain.test.js`: useful invariants for crop geometry, invalid clips, missing research metrics, unsafe links, event timezone conversion and channel coverage.
+## Limitations
 
-The hosted preview is private. Its hosting manifest is tracked in `.openai/hosting.json`; it is not needed to serve the app locally.
+Direct social publishing, automatic competitor monitoring, speech transcription, cloud media synchronization, team invitations and billing are not connected. Integrations clearly state availability. Calendar entries are reminders rather than server publishing jobs. A platform logo does not imply a working connection or partnership.
 
-## Next implementation milestones
+Files remain on the current browser and origin. Clearing site data removes them. Browser storage persistence is requested but not guaranteed. Keep originals backed up. Account sign-in does not synchronize files between devices. Workspace JSON export excludes media and does not yet support restoring arbitrary exports.
 
-1. Add authenticated workspaces, PostgreSQL records and S3-compatible media with tenant-scoped access controls, signed uploads and quotas.
-2. Move video exports into Python/FFmpeg background jobs with durable queue state, progress events and reliable MP4 outputs. Add transcription with editable timestamps.
-3. Verify platform publishing, source imports and analytics separately; implement OAuth, encrypted tokens, revocation, retries, webhook verification and idempotent publish jobs.
-4. Add data-provider-backed competitor watchlists with provenance, data freshness and platform-specific comparisons. Preserve manual evidence as a fallback.
-5. Add team review permissions, subscriptions and metered processing/storage before commercial onboarding.
+Competitor metrics are manually entered public observations; they do not reveal private reach, retention, conversions or paid distribution. Compare similar platforms and periods. Recommendations are experiments, not promises of virality.
+
+## Structure
+
+- `public/`: client application, original SVGs, fonts, photography, platform icons and demonstration video.
+- `worker/index.js`: verified request identity, route protection, response policies and ranged asset delivery.
+- `scripts/build-worker.mjs`: embeds client assets into one deployable Worker under `dist/server/index.js`; no runtime CDN dependencies.
+- `scripts/dev.mjs`: loopback-only development server and development identity.
+- `public/db.js`: account-scoped IndexedDB and explicit earlier-workspace import.
+- `public/media.js`: decode, thumbnails, canvas composition and browser exports.
+- `public/domain.js`: validation, research calculations and calendar serialization.
+- `tests/`: 19 checks for route protection, session separation, safe redirects, security headers, byte ranges, page templates, storage scoping, crop geometry, clip validation and research calculations.
 
 ## Verification
 
-Syntax checks and six Node tests pass. Automated browser QA was unavailable in the authoring environment. Validate an image export and a short video with audio in the target browser before relying on a publishing workflow. Browser codecs and platform acceptance require separate testing.
+Syntax checks, all 19 tests, Worker build and artifact validation pass. The generated MP4 is 1280×720, H.264, 30 seconds, with fast-start metadata and a separate WebVTT caption track. Full desktop/mobile browser sign-in and file-export QA remains outstanding because the authoring environment lacks the supported browser QA integration.
+
+See [DESIGN.md](DESIGN.md), [SECURITY.md](SECURITY.md) and `public/assets/platforms/SOURCES.txt` for visual sources and security assumptions.
 
 ## Ownership
 
-Copyright 2026 Corebridge. All rights reserved. No open-source license is granted by this repository.
-
-## Visual identity
-
-The second visual edition uses an original SVG wordmark, cobalt/coral accents, real editorial photography and self-hosted Space Grotesk/DM Sans fonts. See [DESIGN.md](DESIGN.md) for references and asset provenance.
+Copyright 2026 Corebridge. All rights reserved. Third-party fonts and marks retain their respective licenses. No open-source license is granted for Drop.

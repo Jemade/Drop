@@ -1,0 +1,3 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+test('storage rejects anonymous access and uses separate databases per verified account',async()=>{const db=await import('../public/db.js?scope-test');assert.throws(()=>db.openDB(),/Sign in/);assert.throws(()=>db.configureAccount(''),/verified account/);const opened=[];globalThis.indexedDB={open(name){opened.push(name);const request={result:{}};queueMicrotask(()=>request.onsuccess());return request;}};db.configureAccount('user-a');await db.openDB();db.configureAccount('user-b');await db.openDB();assert.deepEqual(opened,['drop-workspace:user-a','drop-workspace:user-b']);delete globalThis.indexedDB;});

@@ -1,0 +1,14 @@
+Platform marks are for identifying prospective integrations. They do not imply affiliation or an active connection.
+
+SVG paths: Simple Icons, https://github.com/simple-icons/simple-icons (develop; LinkedIn and Amazon fallback to 11.15.0 where needed). CC0 collection; trademarks and individual brand usage rules remain with their owners.
+https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md
+https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md
+
+Google Drive multi-colour icon:
+https://www.gstatic.com/images/branding/product/2x/drive_2020q4_48dp.png
+
+Libsyn and Captivate site favicons, obtained for their exact domains through Google's favicon service:
+https://www.google.com/s2/favicons?domain=libsyn.com&sz=128
+https://www.google.com/s2/favicons?domain=captivate.fm&sz=128
+
+No platform logos were generated or redrawn.
