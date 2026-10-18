@@ -1,0 +1,40 @@
+/* Typography inspired by the verified Repurpose.io type pairing. */
+@font-face{font-family:"Poppins";src:url("/assets/poppins-400.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Poppins";src:url("/assets/poppins-500.ttf") format("truetype");font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:"Poppins";src:url("/assets/poppins-600.ttf") format("truetype");font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:"Poppins";src:url("/assets/poppins-700.ttf") format("truetype");font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/assets/ibmplexsans-400.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/assets/ibmplexsans-500.ttf") format("truetype");font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/assets/ibmplexsans-600.ttf") format("truetype");font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("/assets/ibmplexsans-700.ttf") format("truetype");font-style:normal;font-weight:700;font-display:swap}
+
+:root,body{font-family:"IBM Plex Sans",Arial,sans-serif;font-size:16px;line-height:1.6}
+button,input,select,textarea{font-family:inherit}
+h1,h2,h3,h4,h5,h6,.hero-copy h1,.section-intro h2,.feature-copy h2,.showcase-heading h2,.demo-heading h2,.library-intro h2,.stat strong{font-family:Poppins,Arial,sans-serif;font-style:normal;font-weight:600;letter-spacing:-.035em;line-height:1.35}
+h1{font-size:36px}h2{font-size:26px}h3{font-size:18px}
+.hero-copy h1{font-size:56px;font-weight:700;line-height:1.4;letter-spacing:-.035em;max-width:650px}
+.hero-copy h1 em,.section-intro h2 em,.feature-copy h2 em,.library-intro h2 em{font-family:inherit;font-style:normal;font-weight:inherit;letter-spacing:inherit}
+.hero-copy>p,.section-intro p,.feature-copy p,.honest-note p,.process-list p,.showcase-heading p{font-size:18px;line-height:1.75}
+.section-intro h2,.feature-copy h2,.showcase-heading h2{font-size:38px;line-height:1.35;letter-spacing:-.035em}
+.process-list h3{font-size:26px}.honest-note h2,.demo-heading h2{font-size:32px;line-height:1.4}
+.site-nav nav a,.site-signin,.site-nav .button{font-size:15px}.hero-actions .button{font-size:20px;min-height:54px;padding:15px 23px}.hero-actions .text-link{font-size:16px}
+.announcement{font-size:14px}.site-shell .edition,.hero-copy .edition,.library-intro .edition{font-size:12px;letter-spacing:1.3px;line-height:1.6}
+.hero-caption,.demo-heading>p,.demo-footer>span,.demo-footer .text-link,.site-footer>a,.site-footer span,.format-ribbon>span,.preview-label,.channel-preview>p,.platform-note{font-size:14px;line-height:1.65}
+.format-ribbon b{font-size:16px}.faq-section summary,.faq-section p,.faq-list summary,.faq-list p{font-size:18px;line-height:1.7}
+.shell{grid-template-columns:240px minmax(0,1fr)}.sidebar{width:240px}.nav a{font-size:14px;padding:12px}.nav-group{font-size:12px;letter-spacing:1px}.nav .count{font-size:12px}
+.workspace-switch strong{font-size:14px}.workspace-switch small,.credit{font-size:12px;line-height:1.6}.sidebar-note{font-size:14px}.breadcrumb,.top-actions{font-size:14px}
+.page-heading h1{font-size:34px}.page-heading p,.banner p,.library-intro p,.empty p,.reference p,.insight p,.channel p,.account-panel p,.signin-page>p{font-size:16px;line-height:1.7}
+.library-intro h2,.banner h2{font-size:32px;letter-spacing:-.03em}.library-intro p{max-width:430px}
+.button,.page-heading .button{font-size:15px;min-height:44px;font-weight:600}.button.small{font-size:13px;min-height:36px}.link-button,.tab{font-size:14px}.tabs{gap:8px}
+label{font-size:14px;font-weight:600}input,select,textarea,.search-wrap input,.caption-row input{font-size:16px;line-height:1.5}
+.small,.help,.footnote,.notice,.section-label,.list-row p,.card-meta,.metric-row,.preview-label b,.duration{font-size:13px;line-height:1.65}
+.card-body h3,.channel h3,.reference h3,.list-row h3{font-size:16px}.pill,.calendar-month{font-size:12px}.stat small{font-size:14px}.stat strong{font-size:30px}.ratio-option{font-size:14px}table{font-size:14px}th{font-size:13px}.empty h2{font-size:24px}
+.site-footer>p{font-family:Poppins,Arial,sans-serif;font-size:22px}.signin-page h1{font-size:44px}
+@media(max-width:1100px){.hero-copy h1{font-size:48px}.shell{grid-template-columns:220px minmax(0,1fr)}.sidebar{width:220px}.top-actions{gap:12px}.hero-actions{flex-wrap:wrap}}
+@media(max-width:700px){
+.shell{display:block}.sidebar{width:240px}.main-wrap{width:100%}.hero-copy h1{font-size:40px;line-height:1.4;letter-spacing:-.03em}.hero-copy h1 em{letter-spacing:inherit}.hero-copy>p,.section-intro p,.feature-copy p,.honest-note p,.process-list p,.showcase-heading p{font-size:16px}
+.section-intro h2,.feature-copy h2,.showcase-heading h2{font-size:30px}.demo-heading h2,.honest-note h2{font-size:28px}.hero-actions .button{font-size:17px;min-height:48px}.hero-actions .text-link{font-size:15px}.site-nav .button,.site-signin{font-size:13px}.site-auth{gap:12px}.announcement{font-size:12px}
+.page-heading{flex-wrap:wrap;align-items:start}.page-heading h1{font-size:28px}.page-heading p{font-size:15px}.library-intro{grid-template-columns:1fr;min-height:0}.library-intro h2{font-size:28px}.library-intro p{font-size:15px;max-width:none}.library-photo{min-height:180px}.library-intro .edition{font-size:11px}.stat small{font-size:12px}.stat strong{font-size:25px}.stat{padding:3px 10px}.tabs{flex-wrap:wrap}.tab{font-size:13px;padding:8px 10px}.media-grid,.channel-grid{grid-template-columns:1fr}.card-body h3{font-size:16px}.topbar{height:auto;min-height:64px;gap:12px}.breadcrumb{font-size:13px}.top-actions{font-size:13px;flex-wrap:wrap}.demo-heading>p,.demo-footer>span,.demo-footer .text-link,.site-footer>a{font-size:13px}.format-ribbon{flex-wrap:wrap}.format-ribbon>span{font-size:12px}.format-ribbon b{font-size:14px}.signin-page h1{font-size:34px}
+}
+
+.edition,.text-link,.card-body h3{font-family:"IBM Plex Sans",Arial,sans-serif}.library-photo span,.calendar-day,dialog h2,.hero-caption span,.collage-main figcaption b,.collage-type strong,.format-sticker span,.format-ribbon b,.collage-camera figcaption,.showcase-action>span{font-family:Poppins,Arial,sans-serif;font-style:normal}.site-footer>p{font-style:normal}

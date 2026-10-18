@@ -47,3 +47,8 @@ Client source moved from dist/ to public/; dist/ is now generated Worker output.
 The eight user-provided Repurpose screenshots informed the source/destination selection pattern, format comparison, capability explanations and FAQ interaction. Drop uses its own layout, typography, brand, photography and wording. No screenshot graphics, testimonials, popularity counts, partner claims or platform UI artwork were copied.
 
 The workflow builder supports the available local preparation path. Its social-source choice explains the pending integration rather than implying an active import. The homepage's format previews are labelled examples and do not show invented engagement counts.
+
+
+## Typography refinement
+
+Reference: https://repurpose.io/ (source inspected 18 October 2026). Uses Poppins for headings and IBM Plex Sans for body text. Drop now self-hosts these open-license fonts, including their licenses. The homepage follows the reference hero scale of 56px desktop, 48px tablet and 40px mobile, with 18px body copy (16px mobile). Workspace navigation uses 14px, controls 15–16px, secondary copy 13px and page titles 28–34px. Original Drop identity and layouts are retained. The dedicated typography stylesheet loads last to override earlier compact type rules.
