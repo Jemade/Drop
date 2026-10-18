@@ -45,7 +45,7 @@ Research uses user-provided information, not scraped or invented analytics. Enga
 - `dist/db.js`: IndexedDB repository layer; commits awaited before reporting saves.
 - `dist/media.js`: decode, thumbnail, crop, caption composition and browser export.
 - `dist/domain.js`: pure validation, benchmark calculations and calendar serialization.
-- `dist/styles.css`: original responsive design system. No CDN assets or runtime dependencies.
+- `dist/styles.css`: original responsive design system. No remote runtime dependencies. Fonts and editorial photography are self-hosted; see DESIGN.md for sources and licenses.
 - `tests/domain.test.js`: useful invariants for crop geometry, invalid clips, missing research metrics, unsafe links, event timezone conversion and channel coverage.
 
 The hosted preview is private. Its hosting manifest is tracked in `.openai/hosting.json`; it is not needed to serve the app locally.
@@ -65,3 +65,7 @@ Syntax checks and six Node tests pass. Automated browser QA was unavailable in t
 ## Ownership
 
 Copyright 2026 Corebridge. All rights reserved. No open-source license is granted by this repository.
+
+## Visual identity
+
+The second visual edition uses an original SVG wordmark, cobalt/coral accents, real editorial photography and self-hosted Space Grotesk/DM Sans fonts. See [DESIGN.md](DESIGN.md) for references and asset provenance.
