@@ -33,3 +33,8 @@ Before commercial onboarding: shared authenticated data storage, tenant authoriz
 Drop uses uncompressed ZIP STORE entries with CRC32 checksums. Restore rejects path traversal, duplicate entry names, unsupported compression, bad checksums, oversized files and invalid record IDs. Media is decoded through the browser before writing. Validated records merge into the current account in a single IndexedDB transaction. Existing keys are skipped. The ZIP is a portable plaintext copy and should be stored privately.
 
 Direct Google login has not been enabled without a configured provider. See GOOGLE_SIGN_IN.md for the required identity/session work.
+
+
+## Session revalidation
+
+Account settings can verify the current server session explicitly. Workspace actions recheck it after a maximum 60-second client cache interval, and returning focus forces a fresh check. Expired, malformed or changed account identities lock the database, clear in-memory workspace state and show sign-in. Network failures block the requested action without claiming the session is valid or deleting local records. Hosted provider login/logout still belongs to Sites. Browser interaction coverage remains required.

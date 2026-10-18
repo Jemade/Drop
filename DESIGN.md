@@ -94,3 +94,14 @@ The third revision responds to the supplied three screenshots:
 Phone examples use the same source image across channel layouts. The source is kept intact, captions are escaped, and assets/platform choices are restricted. Guide disclosure controls and audience navigation use native details/summary elements. Mobile navigation and phone-channel selection keep aria-expanded/aria-pressed state.
 
 Verification: syntax, rendering, phone-layout variants and source safety, public routes, asset presence, build and artifact checks. Browser and physical iPhone testing remain outstanding; therefore the previews are labelled illustrative.
+
+
+## Product copy and account verification
+
+Removed decorative directional arrows, external-link arrow marks, the topbar device status, version labels and build commentary from the visible interface. Storage behaviour remains explained in account settings because it affects whether users can recover their files. Future provider availability remains explicit; a visual edit cannot create provider authorization.
+
+Account settings now offers Check sign-in using a fresh server session response. Workspace mutations revalidate the current identity, and focus checks detect expired or changed sessions. A changed identity locks access and clears in-memory records rather than continuing in the previous account.
+
+Production environment inspection found no social OAuth client credentials. Sites plugin eligibility discovery is unavailable in the current tool surface, so hosted connected-app access cannot be declared or verified. Direct Google identity remains unsupported by the current managed Site auth configuration. No provider was marked connected, and no externally published action was performed.
+
+Exact iPhone app interfaces have not been supplied as captures or tested on a physical device. The existing phone examples remain illustrative rather than being relabelled as exact live app displays. This and real social OAuth/provider integration are outstanding release work.

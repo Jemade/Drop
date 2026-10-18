@@ -21,3 +21,5 @@ export async function importLegacy(){
 }
 export async function exportRecords(){const result={};for(const store of STORES)result[store]=await all(store);return result;}
 export async function restoreRecords(records){const database=await openDB();return new Promise((resolve,reject)=>{const tx=database.transaction(STORES,'readwrite');let imported=0;for(const name of STORES){const object=tx.objectStore(name);for(const value of records[name]||[]){const read=object.get(value.id);read.onsuccess=()=>{if(!read.result){object.put(value);imported++;}};}}tx.oncomplete=()=>resolve(imported);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Restore failed. Existing records were preserved.'));});}
+
+export function lockAccount(){const previous=connection;connection=null;databaseName=null;previous?.then(db=>db.close()).catch(()=>{});}
