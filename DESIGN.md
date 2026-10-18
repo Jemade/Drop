@@ -105,3 +105,12 @@ Account settings now offers Check sign-in using a fresh server session response.
 Production environment inspection found no social OAuth client credentials. Sites plugin eligibility discovery is unavailable in the current tool surface, so hosted connected-app access cannot be declared or verified. Direct Google identity remains unsupported by the current managed Site auth configuration. No provider was marked connected, and no externally published action was performed.
 
 Exact iPhone app interfaces have not been supplied as captures or tested on a physical device. The existing phone examples remain illustrative rather than being relabelled as exact live app displays. This and real social OAuth/provider integration are outstanding release work.
+
+
+## Twitch and iPhone reference review
+
+Added the Twitch brand mark and a server-owned external account connection. The client renders status from the server and offers authorisation only when the application is configured. A connected account can validate access, list its videos and disconnect. No provider token is exposed to client JavaScript. The encryption key is configured in secret runtime storage; Twitch application registration is outstanding.
+
+Inspected official Apple iPhone 17 specifications (1206 × 2622) and official Instagram, LinkedIn and YouTube App Store screenshots through Apple’s lookup service. The publicly returned images are promotional screenshots, including older device shapes; they are not verified captures of the current app versions on iPhone 17. They were not republished or described as exact iPhone 17 screens. The device aspect ratio now follows Apple’s published resolution. App chrome remains illustrative until genuine current device captures are available.
+
+No source screenshots were AI-generated or altered. Public copy was shortened; meaningful product availability and storage disclosures remain.

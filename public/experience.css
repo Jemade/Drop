@@ -9,3 +9,6 @@
 @media(max-width:380px){.d-nav{gap:9px}.d-nav .m-menu-toggle{padding:8px;gap:5px}.d-nav .m-menu-toggle>.drop-ui-icon{display:none}.d-nav .m-account .m-button{padding:8px 11px}.d-phone-showcase{grid-template-columns:minmax(100px,.75fr) minmax(160px,1fr);gap:12px}.d-platform-tabs button>span{font-size:10px}.d-preview-kicker{font-size:7px}.d-source-card b{font-size:9px}.d-source-card>span{font-size:7px}.d-preview-hint{font-size:8px}.d-reel-caption{font-size:8px}}
 
 .m-steps article:not(:last-child):after{content:none}.w-flow-arrow{display:none}.account-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:420px}.account-actions p{flex-basis:100%;font-size:13px;color:#486c5a;line-height:1.65;margin:0}.account-import{margin-top:24px;border-top:1px solid #e3e9f2;padding-top:17px}.account-import summary{font-size:14px;cursor:pointer;margin-bottom:15px}
+
+.connection-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.twitch-video-list{max-height:50vh;overflow:auto}.twitch-video-list article{padding:16px 0;border-bottom:1px solid #e0e6ee}
+.d-iphone{aspect-ratio:1206/2622}

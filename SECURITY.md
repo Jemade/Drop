@@ -4,9 +4,9 @@
 
 Deploy behind Sites dispatch only. It validates the managed session and supplies the authenticated user headers. Do not publish this Worker on a bypass origin or trust those headers on a generic public HTTP server.
 
-The Worker checks identity for `/workspace` and `/api/session`. Session responses and pages are no-store. Auth routes are owned by the hosting platform. There are no passwords, custom session secrets, auth tokens in browser storage, payment handlers or social access tokens in this repository.
+The Worker checks identity for `/workspace` and `/api/session`. Session responses and pages are no-store. Auth routes are owned by the hosting platform. Drop stores no passwords or payment details. Twitch credentials are handled server-side; provider tokens are encrypted in Secure, HttpOnly cookies bound to the signed-in Drop account and Site origin. They are not stored in JavaScript-readable browser storage or source files.
 
-No server mutation API exists in this release. Methods other than GET/HEAD receive 405. Every future data endpoint must verify identity, authorize the requested resource and validate input server-side. Sign-in alone is not a team or tenant membership policy.
+Server mutations are limited to the implemented Twitch connection start and disconnect endpoints, which require verified identity and same-origin POSTs. Other methods remain restricted. Every future data endpoint must verify identity, authorize the requested resource and validate input server-side. Sign-in alone is not a team or tenant membership policy.
 
 ## Browser data
 
@@ -38,3 +38,8 @@ Direct Google login has not been enabled without a configured provider. See GOOG
 ## Session revalidation
 
 Account settings can verify the current server session explicitly. Workspace actions recheck it after a maximum 60-second client cache interval, and returning focus forces a fresh check. Expired, malformed or changed account identities lock the database, clear in-memory workspace state and show sign-in. Network failures block the requested action without claiming the session is valid or deleting local records. Hosted provider login/logout still belongs to Sites. Browser interaction coverage remains required.
+
+
+## Twitch authorisation
+
+See CONNECTIONS.md. OAuth state expires after ten minutes; cookies are authenticated with AES-256-GCM and account/purpose/origin binding. Callback errors redirect without exposing provider credentials or descriptions. No provider requests accept arbitrary client URLs or account IDs. Active status and video reads validate the token; expired tokens refresh on the server. Status uses only verified provider responses, never a browser flag. Client credentials are required before enabling connection. No live authorisation is claimed until that flow is tested.
