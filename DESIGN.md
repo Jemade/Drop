@@ -81,3 +81,16 @@ Additional licensed Unsplash photography, downloaded and self-hosted:
 Photos are illustrative; no depicted person or business is claimed as a customer or endorser. Social platform marks identify intended formats, not connected integrations or partners.
 
 QA: syntax checks, route rendering, public route HTTP behavior and output asset checks. Full browser visual verification is unavailable in this environment.
+
+
+## Drop navigation, device previews and workspace guidance
+
+The third revision responds to the supplied three screenshots:
+
+1. The public header now uses an original Drop brand lockup, explicit home icon, grouped “Made for” navigation and product/demo links. It removes the announcement strip and the audience-link row that resembled the reference too closely. The workspace sidebar and topbar also have explicit Home links.
+2. Flat format cards are replaced with an original source-to-device composition. Visitors select Instagram, LinkedIn or YouTube to see distinct illustrative iPhone layouts. The device shell uses a modern portrait screen ratio, Dynamic Island, status icons and home indicator. Authentic existing platform marks identify the channels. These are hand-built illustrative layouts, not captured apps or live posts. No exact rendering claim, invented engagement figures or publishing claim is made.
+3. The media library now has a practical diagram instead of the decorative camera banner. Every workspace tool has a contextual guide explaining its input, action, result and material limitations. A tool directory links to all workspace features. Icons are consistent inline SVGs owned by Drop; channel logos remain the existing platform assets.
+
+Phone examples use the same source image across channel layouts. The source is kept intact, captions are escaped, and assets/platform choices are restricted. Guide disclosure controls and audience navigation use native details/summary elements. Mobile navigation and phone-channel selection keep aria-expanded/aria-pressed state.
+
+Verification: syntax, rendering, phone-layout variants and source safety, public routes, asset presence, build and artifact checks. Browser and physical iPhone testing remain outstanding; therefore the previews are labelled illustrative.
