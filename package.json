@@ -1,0 +1,1 @@
+{"name":"drop-corebridge","version":"0.1.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.js","check":"node --check dist/app.js && node --check dist/media.js && node --check dist/db.js && node --check dist/domain.js","start":"python3 -m http.server 8000 --directory dist"}}
