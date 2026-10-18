@@ -114,3 +114,8 @@ Added the Twitch brand mark and a server-owned external account connection. The 
 Inspected official Apple iPhone 17 specifications (1206 × 2622) and official Instagram, LinkedIn and YouTube App Store screenshots through Apple’s lookup service. The publicly returned images are promotional screenshots, including older device shapes; they are not verified captures of the current app versions on iPhone 17. They were not republished or described as exact iPhone 17 screens. The device aspect ratio now follows Apple’s published resolution. App chrome remains illustrative until genuine current device captures are available.
 
 No source screenshots were AI-generated or altered. Public copy was shortened; meaningful product availability and storage disclosures remain.
+
+
+## Google connections
+
+Connections cards for Google Drive and YouTube now render their server-verified status, support consent navigation, account checks, browsing and disconnect. Drive media import feeds the existing library upload/inspection path; YouTube exposes only safe links to the connected channel's uploads. No publishing action or live test success is implied. Google application registration is the next user setup step.

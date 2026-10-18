@@ -1,4 +1,23 @@
-# Twitch connection activation
+# Drop connection status
+
+No provider developer applications have been registered yet. Application credentials and account authorisation are therefore the immediate activation dependency.
+
+| Provider | Implemented in Drop | Live status |
+| --- | --- | --- |
+| Google Drive | OAuth, account check, media list, streaming import, refresh, disconnect | Awaiting Google app setup and live tests |
+| YouTube | OAuth, account/channel check, own uploads list, refresh, disconnect | Awaiting Google app setup and live tests |
+| Twitch | OAuth, account check, own video list, refresh, disconnect | Awaiting Twitch app setup and live tests |
+| Instagram, Facebook, Threads | Not implemented | Needs Meta application setup and provider-specific implementation |
+| TikTok, Snapchat, LinkedIn, Pinterest, X | Not implemented | Needs each provider's app setup and provider-specific implementation |
+| Dropbox, SoundCloud | Not implemented | Needs app setup and provider-specific implementation |
+| Bluesky | Not implemented | Needs a separately verified authorisation and content workflow |
+| Libsyn, Captivate.fm, Amazon | Not implemented | Access and intended content capabilities must be confirmed before offering integration |
+
+None of these connections currently publishes automatically. Account authorisation, reading, importing, publishing and analytics are separate capabilities. A Connected account is not evidence that publishing is implemented.
+
+First activation batch: follow GOOGLE_CONNECTIONS.md for Google Drive and YouTube. Then activate Twitch using the steps below. Do not register every connection as a shared generic OAuth flow: provider requirements and capabilities differ.
+
+## Twitch connection activation
 
 Implemented: server-side OAuth authorisation-code flow, identity-bound encrypted HttpOnly cookies, state validation, token validation and refresh, own-channel video listing, and disconnect/revocation. This links a Twitch account; it does not replace Drop sign-in.
 

@@ -12,3 +12,5 @@
 
 .connection-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.twitch-video-list{max-height:50vh;overflow:auto}.twitch-video-list article{padding:16px 0;border-bottom:1px solid #e0e6ee}
 .d-iphone{aspect-ratio:1206/2622}
+
+.provider-items{max-height:52vh;overflow:auto}.provider-items article{padding:16px 0;border-bottom:1px solid #e0e6ee;display:flex;gap:16px;align-items:center;justify-content:space-between}.provider-items h3{font-size:15px;overflow-wrap:anywhere;margin-bottom:6px}.provider-items .help{margin:0}.provider-items article>div{min-width:0}

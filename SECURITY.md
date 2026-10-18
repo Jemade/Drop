@@ -43,3 +43,8 @@ Account settings can verify the current server session explicitly. Workspace act
 ## Twitch authorisation
 
 See CONNECTIONS.md. OAuth state expires after ten minutes; cookies are authenticated with AES-256-GCM and account/purpose/origin binding. Callback errors redirect without exposing provider credentials or descriptions. No provider requests accept arbitrary client URLs or account IDs. Active status and video reads validate the token; expired tokens refresh on the server. Status uses only verified provider responses, never a browser flag. Client credentials are required before enabling connection. No live authorisation is claimed until that flow is tested.
+
+
+## Google account connections
+
+Drive and YouTube use the existing verified Drop identity, provider-scoped encrypted cookies, OAuth state, PKCE and server-side code exchange. The callback checks granted scopes before saving credentials. Each read confirms the connected Google subject; revoked or changed identities clear the connection. Same-origin POSTs are required for starting or disconnecting. Only read scopes are requested. Drive metadata and streamed byte counts enforce supported types, download permission and a 250 MB limit; arbitrary remote URLs are never accepted. Google client credentials and real account consent tests remain outstanding. See GOOGLE_CONNECTIONS.md.

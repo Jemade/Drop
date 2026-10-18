@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "check": "node --check public/account.js && node --check public/phone-preview.js && node --check public/workspace-guide.js && node --check public/ui-icons.js && node --check public/marketing.js && node --check public/app.js && node --check public/media.js && node --check public/db.js && node --check public/domain.js && node --check worker/twitch.js && node --check worker/index.js && node --check public/archive.js && node --check public/backup.js && node --check public/workflows.js",
+    "check": "node --check public/account.js && node --check public/phone-preview.js && node --check public/workspace-guide.js && node --check public/ui-icons.js && node --check public/marketing.js && node --check public/app.js && node --check public/media.js && node --check public/db.js && node --check public/domain.js && node --check worker/google.js && node --check worker/twitch.js && node --check worker/index.js && node --check public/archive.js && node --check public/backup.js && node --check public/workflows.js",
     "start": "node scripts/dev.mjs",
     "build": "node scripts/build-worker.mjs"
   }
