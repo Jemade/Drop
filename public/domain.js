@@ -1,4 +1,4 @@
-export const CHANNELS = ['Instagram','YouTube','TikTok','Facebook','Snapchat','LinkedIn','Pinterest','Threads','X','Bluesky','Google Drive','Dropbox','SoundCloud','Libsyn','Captivate.fm','Amazon','Twitch'];
+export const CHANNELS = ['Instagram','YouTube','TikTok','Facebook','Snapchat','LinkedIn','Pinterest','Threads','X','Google Drive','Dropbox'];
 export const RATIOS = {'9:16':[720,1280],'1:1':[1080,1080],'16:9':[1280,720]};
 export const uid = () => crypto.randomUUID();
 export function escapeHTML(value=''){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}

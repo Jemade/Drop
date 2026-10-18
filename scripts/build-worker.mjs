@@ -6,7 +6,11 @@ async function collect(dir){for(const entry of await readdir(dir,{withFileTypes:
 await collect(path.join(root,'public'));
 const twitchSource=(await readFile('worker/twitch.js','utf8')).replace(/^export /gm,'');
 const googleSource=(await readFile('worker/google.js','utf8')).replace(/^import .*;$/gm,'').replace(/^export /gm,'');
-const source=(await readFile('worker/index.js','utf8')).replace("import {handleTwitch} from './twitch.js';",twitchSource).replace("import {handleGoogle} from './google.js';",googleSource);
+const dropboxSource=(await readFile('worker/dropbox.js','utf8')).replace(/^import .*;$/gm,'').replace(/^export /gm,'');
+const linkedinSource=(await readFile('worker/linkedin.js','utf8')).replace(/^import .*;$/gm,'').replace(/^export /gm,'');
+const tiktokSource=(await readFile('worker/tiktok.js','utf8')).replace(/^import .*;$/gm,'').replace(/^export /gm,'');
+const metaSource=(await readFile('worker/meta.js','utf8')).replace(/^import .*;$/gm,'').replace(/^export /gm,'');
+const source=(await readFile('worker/index.js','utf8')).replace("import {handleMeta} from './meta.js';",metaSource).replace("import {handleTwitch} from './twitch.js';",twitchSource).replace("import {handleGoogle} from './google.js';",googleSource).replace("import {handleTiktok} from './tiktok.js';",tiktokSource).replace("import {handleLinkedin} from './linkedin.js';",linkedinSource).replace("import {handleDropbox} from './dropbox.js';",dropboxSource);
 const output=source.replace(/\/\* DROP_ASSETS_START \*\/[\s\S]*?\/\* DROP_ASSETS_END \*\//,JSON.stringify(assets));
 await rm('dist',{recursive:true,force:true});await mkdir('dist/server',{recursive:true});await mkdir('dist/.openai',{recursive:true});await writeFile('dist/server/index.js',output);await copyFile('.openai/hosting.json','dist/.openai/hosting.json');
 console.log(`Built Worker with ${Object.keys(assets).length} embedded assets (${(Buffer.byteLength(output)/1024/1024).toFixed(2)} MB).`);

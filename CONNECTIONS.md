@@ -1,17 +1,15 @@
 # Drop connection status
 
-No provider developer applications have been registered yet. Application credentials and account authorisation are therefore the immediate activation dependency.
+Google Drive and YouTube credentials are configured and both accounts have connected in live testing. Remaining providers require the setup described below.
 
 | Provider | Implemented in Drop | Live status |
 | --- | --- | --- |
-| Google Drive | OAuth, account check, media list, streaming import, refresh, disconnect | Awaiting Google app setup and live tests |
-| YouTube | OAuth, account/channel check, own uploads list, refresh, disconnect | Awaiting Google app setup and live tests |
-| Twitch | OAuth, account check, own video list, refresh, disconnect | Awaiting Twitch app setup and live tests |
+| Google Drive | OAuth, account check, media list, streaming import, refresh, disconnect | Connected in live testing; Drive listing and YouTube browsing verified. Drive import fix deployed. |
+| YouTube | OAuth, account/channel check, own uploads list, refresh, disconnect | Connected in live testing; Drive listing and YouTube browsing verified. Drive import fix deployed. |
+| Twitch | Paused and removed from the visible product | Developer registration blocked by account 2FA setup |
 | Instagram, Facebook, Threads | Not implemented | Needs Meta application setup and provider-specific implementation |
 | TikTok, Snapchat, LinkedIn, Pinterest, X | Not implemented | Needs each provider's app setup and provider-specific implementation |
-| Dropbox, SoundCloud | Not implemented | Needs app setup and provider-specific implementation |
-| Bluesky | Not implemented | Needs a separately verified authorisation and content workflow |
-| Libsyn, Captivate.fm, Amazon | Not implemented | Access and intended content capabilities must be confirmed before offering integration |
+| Dropbox | OAuth with PKCE, refresh, account check, folder browsing, pagination, streaming media import and disconnect | Developer app and runtime credentials configured; live test pending |
 
 None of these connections currently publishes automatically. Account authorisation, reading, importing, publishing and analytics are separate capabilities. A Connected account is not evidence that publishing is implemented.
 
@@ -46,3 +44,5 @@ References inspected 18 October 2026:
 Automated tests cover encryption binding and tampering, missing setup, cross-origin start rejection, invalid/expired state, successful mocked token exchange, provider validation, bounded video listing, refresh, revoked credentials and disconnect. Mock tests are not proof of live provider authorisation. Hosted authorisation and real account testing await app registration.
 
 Other social providers remain unavailable. Each needs its own authorised implementation; adding a brand icon is not an integration.
+
+Removed from the product at the owner’s request: Bluesky, SoundCloud, Amazon, Libsyn and Captivate.fm.
