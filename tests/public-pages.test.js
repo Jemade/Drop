@@ -9,7 +9,7 @@ test('audience pages show distinct task displays instead of the homepage graph',
     const html = marketingPage(page);
     assert.ok(html.includes(`data-display="${display}"`), page);
     assert.ok(!html.includes('drop-connection-art'), page);
-    assert.equal((html.match(/<h1>/g)||[]).length, 1);
+    assert.equal((html.match(/<h1(?:\s[^>]*)?>/g)||[]).length, 1);
     assert.ok(!html.includes('undefined'));
   }
 });
@@ -28,7 +28,7 @@ test('account entry pages use secure existing authentication without collecting 
     const html = marketingPage(page);
     assert.ok(html.includes('/signin-with-chatgpt?return_to=%2Fworkspace'));
     assert.ok(!html.includes('type="password"'));
-    assert.equal((html.match(/<h1>/g)||[]).length, 1);
+    assert.equal((html.match(/<h1(?:\s[^>]*)?>/g)||[]).length, 1);
   }
   assert.notEqual(marketingPage('signup'),marketingPage('signin'));
 });

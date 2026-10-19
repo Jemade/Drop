@@ -27,3 +27,7 @@ The hosted release has library, draft and storage preferences in addition to bra
 Account and primary action links have hover and visible keyboard-focus states. Reduced-motion preferences disable the decorative transition. Narrow layouts stack the page columns and keep all account actions available.
 
 `tests/public-pages.test.js` checks distinct audience displays, separate account entry pages and public routes while preserving the workspace authentication redirect. Template tests do not verify full browser layout or the external authentication provider.
+
+## Homepage
+
+The landing hero uses centred product copy, floating local platform marks and an illustrative workflow window. App marks link to Connections; Open Drop opens the workspace; the demonstration button uses the existing walkthrough handler. The product window is labelled as an illustration, not a live account or customer activity. Solid Ocean and Ivory surfaces preserve the brand palette. Reduced-motion and keyboard-focus states apply to the hero actions.
