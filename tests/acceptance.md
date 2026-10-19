@@ -8,5 +8,5 @@
 6. Add two source references with complete metrics and one with no metrics. Verify the empty metrics do not count as zero and the source links open separately.
 7. Turn a reference into a brief. Save it to Calendar and import its .ics file into a calendar. Check the local time matches.
 8. Create and apply a preparation preset to an uploaded image.
-9. Open Connections. Every external service must state Not connected; no button should imply successful OAuth or publication.
+9. Open Connections. Unconfigured providers must state unavailable. Configured providers must remain disconnected until authorisation succeeds. Test consent denial, correct account identity, read/import and disconnect. No connection should imply publishing support.
 10. Delete a media file after confirmation. Confirm its preparation is gone and the original on your device is unaffected.

@@ -1,6 +1,6 @@
 # Drop connection status
 
-No provider developer applications have been registered yet. Application credentials and account authorisation are therefore the immediate activation dependency.
+Connection code and deployed readiness are separate. Configure the appropriate developer application, runtime credentials and authorised test account before enabling a provider. This document describes the source implementation; it does not attest to any deployment’s current secrets or approval status.
 
 | Provider | Implemented in Drop | Live status |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ First activation batch: follow GOOGLE_CONNECTIONS.md for Google Drive and YouTub
 
 Implemented: server-side OAuth authorisation-code flow, identity-bound encrypted HttpOnly cookies, state validation, token validation and refresh, own-channel video listing, and disconnect/revocation. This links a Twitch account; it does not replace Drop sign-in.
 
-The production encryption secret is configured. Twitch app credentials are not configured. The UI remains Unavailable until registration is completed.
+Twitch is unavailable when the required runtime values are missing. Configure the encryption key and application credentials before activation.
 
 ## Register the provider app
 

@@ -1,94 +1,75 @@
 # Drop
 
-Content preparation, research and publication planning. Powered by [Corebridge](https://corebridge.co.zw).
+A browser-based workspace for preparing images and videos, organising drafts, researching content and planning publication. Built by [Corebridge](https://corebridge.co.zw).
 
-## Version 0.2
+## Features
 
-- Original vector identity, self-hosted fonts, real photography and responsive workspace.
-- Captioned 30-second illustrated product demonstration on the homepage, with an example-photo flow you can try.
-- Managed Sign in with ChatGPT, server-protected workspace route, verified session endpoint and sign-out.
-- Browser media and records separated by verified account. An explicit settings action imports the earlier local preview's data on your own device without overwriting current records.
-- Proper platform marks for all 16 integration destinations.
-- Media library, crop/trim/manual captions/branding, PNG and browser-video export, drafts, personal approvals, manually sourced research, reusable presets and calendar reminders.
+- Import images, video and audio from your device, with a 250 MB per-file limit.
+- Crop images and video to portrait, square or landscape formats; trim video; add branding and manually timed captions.
+- Export PNG images and browser-recorded video; save preparation versions and reusable presets.
+- Organise drafts, personal review states, research references and publication reminders.
+- Export content kits and full workspace backups; restore backups without overwriting existing records.
+- Connect Google Drive, YouTube and Twitch through server-side account authorisation when deployment credentials are configured.
 
-## Run locally
+The browser performs media preparation; captions and research observations are entered manually.
 
-Node 20+ is required. No npm dependencies or API keys are needed.
+## Quick start
+
+Requires Node.js 20 or later and a modern browser with IndexedDB, Canvas and MediaRecorder support. The application has no npm runtime dependencies.
 
 ```sh
+git clone https://github.com/Jemade/Drop.git
+cd Drop
 npm start
 ```
 
-Open http://127.0.0.1:8000. The development server binds only to loopback and provides an explicitly labelled development identity. Never expose that server publicly. Production authentication is provided by Sites dispatch, not this local server.
+Open <http://127.0.0.1:8000>. The development server uses a fixed local identity and binds to loopback only. It is not a production server. Source changes require restarting it.
+
+## Verify a change
 
 ```sh
 npm run check
 npm test
 npm run build
-node scripts/validate-artifact.mjs
+npm run validate
 ```
 
-## Hosted identity and security boundary
+Tests use isolated fixtures and mocked provider responses. Passing them does not verify live OAuth, browser codec support or delivery to an external service. Complete the [manual acceptance walkthrough](tests/acceptance.md) for affected user flows.
 
-Production runs as a Cloudflare Worker behind Sites dispatch. The hosting platform owns sign-in, sign-out, session cookies and verification. Drop consumes the verified `oai-authenticated-user-id` and email headers server-side. These headers are not a standalone authentication mechanism; deploying this Worker publicly outside that trusted dispatch boundary requires a real identity verifier.
+## Storage and deployment
 
-- `/workspace` redirects anonymous requests to managed sign-in.
-- `/api/session` returns 401 without a complete verified identity and is never cached.
-- Sign-in uses top-level navigation; there are no custom password fields, client bearer tokens or tokens in localStorage.
-- Workspace rendering and IndexedDB initialization require a verified session. Each account uses a separate database name.
-- CSP, nosniff, referrer and permissions policies are applied. The Worker exposes no state-changing API routes; other methods receive 405.
-- Site audience remains owner-private. This update does not open the site to the public or invite customers.
+Media and workspace records remain in account-scoped IndexedDB on the current browser and origin. Sign-in does not synchronise files across devices. Download backups and keep originals before clearing browser data or changing origins.
 
-Authentication protects access to the hosted workspace. Media remains local browser data, not encrypted cloud storage. Anyone with control of the same operating-system/browser profile may inspect local files. Do not use shared browser profiles for confidential client media.
+Production uses a Cloudflare Worker behind a trusted hosting authentication gateway. The Worker cannot safely be exposed directly while trusting identity headers. Provider secrets remain on the server. See [Security](SECURITY.md) and [Deployment](docs/DEPLOYMENT.md).
 
-## Working personal flows
+## Supported connections
 
-1. Upload a real image, video or audio file, up to 250 MB each. Metadata and thumbnails are stored in IndexedDB.
-2. Prepare portrait, square or landscape versions. Reposition a crop, trim video, add brand text and manually timed captions.
-3. Export PNG images or browser-recorded video (usually WebM; codec depends on browser). Video exports run in real time and require keeping the tab visible.
-4. Save drafts, send to your own review checklist and mark approved.
-5. Save source references and observations; optionally enter public metrics. Complete entries produce reaction/comment engagement comparisons. Missing metrics are not treated as zero.
-6. Turn references into original briefs, save publication plans and export .ics reminders.
-7. Reuse preparation presets, change brand defaults, download originals and export workspace notes.
+| Provider | Implemented capability |
+| --- | --- |
+| Google Drive | Read media metadata and import authorised files |
+| YouTube | Read the authorised channel and its uploads |
+| Twitch | Read the authorised account and its channel videos |
+| Other displayed platforms | Preparation destinations only; no connected API implementation |
 
-The homepage demonstration is a labelled illustrated walkthrough made from product layouts and example photography, not a recording of customer activity. It shows manual publication planning. Regenerate it with `python3 tools/generate_demo.py` (Pillow and FFmpeg required).
+These connections require deployment configuration and account consent. This repository does not implement direct publication, unattended scheduling, provider analytics, shared team workspaces or billing. Calendar exports are reminders. Check [Connections](CONNECTIONS.md) before enabling a provider.
 
-## Limitations
+## Documentation
 
-Direct social publishing, automatic competitor monitoring, speech transcription, cloud media synchronization, team invitations and billing are not connected. Integrations clearly state availability. Calendar entries are reminders rather than server publishing jobs. A platform logo does not imply a working connection or partnership.
+| Guide | Contents |
+| --- | --- |
+| [Architecture](docs/ARCHITECTURE.md) | Components, request flows and trust boundaries |
+| [Development](docs/DEVELOPMENT.md) | Local setup, scripts and testing |
+| [Deployment](docs/DEPLOYMENT.md) | Runtime requirements, configuration and release procedure |
+| [HTTP API](docs/API.md) | Session, connection routes and error handling |
+| [Storage](docs/STORAGE.md) | Record ownership, backups and recovery |
+| [User guide](docs/USER_GUIDE.md) | Media preparation, research and planning |
+| [Connections](CONNECTIONS.md) | Provider capabilities and activation checklist |
+| [Google connections](GOOGLE_CONNECTIONS.md) | Drive and YouTube setup |
+| [Authentication](GOOGLE_SIGN_IN.md) | Workspace sign-in versus external account connections |
+| [Design](DESIGN.md) | Interface and accessibility conventions |
+| [Contributing](CONTRIBUTING.md) | Change workflow and review expectations |
+| [Security](SECURITY.md) | Security model and vulnerability reporting |
 
-Files remain on the current browser and origin. Clearing site data removes them. Browser storage persistence is requested but not guaranteed. Keep originals backed up. Account sign-in does not synchronize files between devices. Workspace JSON export excludes media and does not yet support restoring arbitrary exports.
+## Licensing
 
-Competitor metrics are manually entered public observations; they do not reveal private reach, retention, conversions or paid distribution. Compare similar platforms and periods. Recommendations are experiments, not promises of virality.
-
-## Structure
-
-- `public/`: client application, original SVGs, fonts, photography, platform icons and demonstration video.
-- `worker/index.js`: verified request identity, route protection, response policies and ranged asset delivery.
-- `scripts/build-worker.mjs`: embeds client assets into one deployable Worker under `dist/server/index.js`; no runtime CDN dependencies.
-- `scripts/dev.mjs`: loopback-only development server and development identity.
-- `public/db.js`: account-scoped IndexedDB and explicit earlier-workspace import.
-- `public/media.js`: decode, thumbnails, canvas composition and browser exports.
-- `public/domain.js`: validation, research calculations and calendar serialization.
-- `tests/`: 19 checks for route protection, session separation, safe redirects, security headers, byte ranges, page templates, storage scoping, crop geometry, clip validation and research calculations.
-
-## Verification
-
-Syntax checks, all 19 tests, Worker build and artifact validation pass. The generated MP4 is 1280×720, H.264, 30 seconds, with fast-start metadata and a separate WebVTT caption track. Full desktop/mobile browser sign-in and file-export QA remains outstanding because the authoring environment lacks the supported browser QA integration.
-
-See [DESIGN.md](DESIGN.md), [SECURITY.md](SECURITY.md) and `public/assets/platforms/SOURCES.txt` for visual sources and security assumptions.
-
-## Ownership
-
-Copyright 2026 Corebridge. All rights reserved. Third-party fonts and marks retain their respective licenses. No open-source license is granted for Drop.
-
-## Version 0.3
-
-- Screenshot-inspired original channel-format previews, integration availability strip and expandable FAQ on the homepage.
-- A three-step workflow builder: library source, preparation destinations, output formats. Saved workflows export a real ZIP content kit with prepared files and a manual publication manifest.
-- Full browser workspace backup ZIP, including original media. Restore validates paths, checksums, record identifiers and media decodability before an atomic IndexedDB merge. Existing records are not overwritten. Archives are not encrypted and are limited to 500 MB.
-- Multiple saved preparation versions, exact draft links and navigation autosave for edited drafts.
-- Video export checks cancellation before setup and during frame composition.
-- Direct Google sign-in is still a configuration/hosting dependency; see GOOGLE_SIGN_IN.md. Current managed sign-in remains active.
-
-The checks now include ZIP binary round-trips, damaged archive rejection, backup metadata validation, workflow validation, all page templates, original reference-inspired homepage sections, and the earlier auth/domain checks. ZIP output was also checked with Python's independent zipfile reader.
+No project-wide licence has been selected in this repository. Contact Corebridge before redistributing the application. Bundled fonts and platform assets retain their own notices under `public/assets/`.

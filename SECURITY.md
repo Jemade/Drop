@@ -1,50 +1,31 @@
-# Drop security model
+# Security
 
-## Production
+## Report a vulnerability
 
-Deploy behind Sites dispatch only. It validates the managed session and supplies the authenticated user headers. Do not publish this Worker on a bypass origin or trust those headers on a generic public HTTP server.
+Email `info@corebridge.co.zw` with the affected component, reproduction steps and impact. Do not include live access tokens, client secrets, browser backups or private customer media. Do not publish exploit details in a public issue before the report has been assessed. This repository does not promise a response-time service level or a bounty.
 
-The Worker checks identity for `/workspace` and `/api/session`. Session responses and pages are no-store. Auth routes are owned by the hosting platform. Drop stores no passwords or payment details. Twitch credentials are handled server-side; provider tokens are encrypted in Secure, HttpOnly cookies bound to the signed-in Drop account and Site origin. They are not stored in JavaScript-readable browser storage or source files.
+## Authentication boundary
 
-Server mutations are limited to the implemented Twitch connection start and disconnect endpoints, which require verified identity and same-origin POSTs. Other methods remain restricted. Every future data endpoint must verify identity, authorize the requested resource and validate input server-side. Sign-in alone is not a team or tenant membership policy.
+Production must run behind the trusted hosting authentication gateway. `worker/index.js` consumes the gateway's verified account headers; those headers are not authentication on an arbitrary public server. Do not expose a direct bypass origin without implementing a real session verifier.
 
-## Browser data
+Workspace requests require identity. Session responses are no-store. The browser rechecks the session for actions and on returning focus; expired or changed identities lock local access and clear in-memory state. Sign-in is an access control, not local disk encryption or a team membership policy.
 
-IndexedDB is partitioned using the verified Site-specific user ID. Anonymous initialization fails. Native sign-out navigates the whole page, discarding in-memory state. The earlier unscoped workspace can only be copied through an explicit user action. Do not use that import feature on a shared device.
+## Provider credentials
 
-Local data is not encrypted at rest by Drop. An operating-system user who can inspect the browser profile can inspect its IndexedDB. Server sign-in does not substitute for operating-system account isolation.
+Google and Twitch credentials remain server-side. Connection cookies use authenticated AES-GCM encryption with account, purpose/provider and origin binding. Cookies are Secure and HttpOnly. Start/disconnect operations require identity and same-origin POST requests. Callbacks validate transaction state; Google also uses PKCE and checks granted scopes. Reads verify the connected external identity and refresh expired credentials when possible.
 
-## Client inputs
+Tokens must never be returned to browser JavaScript, logged, committed or placed in browser-readable storage. Configure secrets through deployment settings. Rotating the connection encryption key requires users to reconnect.
 
-User-facing text is HTML escaped, source links are restricted to http/https and media is decoded through browser codecs. Exports use canvas and MediaRecorder. Crop, trim and caption settings are validated. Upload size is limited to 250 MB per file. Browser storage quotas still apply.
+## Browser storage and files
 
-CSP limits scripts, network connections, fonts and media to the current origin or required blob/data URLs. No third-party analytics or runtime CDN scripts are included. Brand logos are local assets and do not authorize platform API access.
+IndexedDB is partitioned by verified account ID but is not encrypted at rest. Anyone controlling the operating-system/browser profile may inspect local data. Use separate browser profiles for confidential work and protect exported backups.
 
-## Development
+Imports enforce a 250 MB per-file limit and rely on browser decoding. Rendered text is escaped and source URLs are restricted to HTTP(S). Drive downloads require authorised file metadata and enforced streaming limits. Arbitrary remote URLs are not accepted for that operation.
 
-`npm start` binds to 127.0.0.1 and provides a fixed local-development identity solely for personal testing. It must never be exposed to the internet or used as production authentication. Production build excludes the development server.
+Backup restore rejects traversal paths, duplicate names, unsupported compression, damaged checksums and invalid records. Validated records merge transactionally without overwriting existing IDs. ZIP backups are plaintext and limited to 500 MB.
 
-## Remaining release gates
+## Development and release limits
 
-Before commercial onboarding: shared authenticated data storage, tenant authorization, encrypted provider tokens, abuse limits, audit logs, durable processing jobs, verified OAuth integrations and complete browser E2E testing. Current tests verify handler behavior and domain invariants; they do not certify the whole platform as secure.
+The development server supplies a fixed identity on loopback only. Never expose it publicly. Tests cover selected handler, storage and provider invariants; they are not a security certification or proof of live provider approval.
 
-## Workspace archives
-
-Drop uses uncompressed ZIP STORE entries with CRC32 checksums. Restore rejects path traversal, duplicate entry names, unsupported compression, bad checksums, oversized files and invalid record IDs. Media is decoded through the browser before writing. Validated records merge into the current account in a single IndexedDB transaction. Existing keys are skipped. The ZIP is a portable plaintext copy and should be stored privately.
-
-Direct Google login has not been enabled without a configured provider. See GOOGLE_SIGN_IN.md for the required identity/session work.
-
-
-## Session revalidation
-
-Account settings can verify the current server session explicitly. Workspace actions recheck it after a maximum 60-second client cache interval, and returning focus forces a fresh check. Expired, malformed or changed account identities lock the database, clear in-memory workspace state and show sign-in. Network failures block the requested action without claiming the session is valid or deleting local records. Hosted provider login/logout still belongs to Sites. Browser interaction coverage remains required.
-
-
-## Twitch authorisation
-
-See CONNECTIONS.md. OAuth state expires after ten minutes; cookies are authenticated with AES-256-GCM and account/purpose/origin binding. Callback errors redirect without exposing provider credentials or descriptions. No provider requests accept arbitrary client URLs or account IDs. Active status and video reads validate the token; expired tokens refresh on the server. Status uses only verified provider responses, never a browser flag. Client credentials are required before enabling connection. No live authorisation is claimed until that flow is tested.
-
-
-## Google account connections
-
-Drive and YouTube use the existing verified Drop identity, provider-scoped encrypted cookies, OAuth state, PKCE and server-side code exchange. The callback checks granted scopes before saving credentials. Each read confirms the connected Google subject; revoked or changed identities clear the connection. Same-origin POSTs are required for starting or disconnecting. Only read scopes are requested. Drive metadata and streamed byte counts enforce supported types, download permission and a 250 MB limit; arbitrary remote URLs are never accepted. Google client credentials and real account consent tests remain outstanding. See GOOGLE_CONNECTIONS.md.
+Before shared commercial onboarding, review tenant authorisation, central storage, abuse limits, auditability, durable processing and browser end-to-end coverage. Current personal workflow states do not provide team access controls. Keep runtime secrets and platform approval status separate from source documentation.

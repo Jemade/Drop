@@ -6,7 +6,7 @@
 - YouTube: account authorisation, account/channel checks, a bounded list from the authorised channel's uploads playlist, token refresh and disconnect. Read-only access; no video downloads, uploads or automatic publishing.
 - Google identity permissions link an external account. Drop sign-in remains managed by Sites; this is not direct Google login.
 
-No Google developer application is registered yet. These connections stay unavailable until credentials are configured, APIs enabled and the account grants consent. Automated tests use provider fixtures; live authorisation and device-level import/export testing remain outstanding.
+These connections stay unavailable until credentials are configured, APIs enabled and the account grants consent. Automated tests use provider fixtures; independently verify live authorisation and device-level import/export for each deployment.
 
 ## Setup, in order
 
@@ -19,7 +19,7 @@ No Google developer application is registered yet. These connections stay unavai
 
    `https://drop-corebridge.yummy-jay-4160.chatgpt.site/api/connections/youtube/callback`
 
-5. Configure `GOOGLE_CLIENT_ID` and secret `GOOGLE_CLIENT_SECRET` in Drop's production runtime settings. The existing `CONNECTION_ENCRYPTION_KEY` is already configured; do not rotate it casually. Never commit a client secret or put it in a public issue.
+5. Configure `GOOGLE_CLIENT_ID` and secret `GOOGLE_CLIENT_SECRET` in Drop's production runtime settings. Configure `CONNECTION_ENCRYPTION_KEY` as described in docs/DEPLOYMENT.md; rotating it invalidates existing connection cookies. Never commit a client secret or put it in a public issue.
 6. Redeploy the saved source with the new environment revision. Open Drop → Connections and authorise Drive and YouTube independently.
 7. Test the real account names, denied permissions, cancelled consent, expired authorisation, disconnect and revoked grants. Import a small image and short MP4 from Drive, prepare them and inspect exports. Compare the YouTube list with the authorised channel's own uploads.
 
