@@ -1,6 +1,7 @@
+import {fetchSession} from './session-api.js';
 export class SignInRequired extends Error {constructor(message='Your sign-in has expired. Please sign in again.'){super(message);this.name='SignInRequired';}}
 export async function verifyAccount(expectedId,request=fetch){
- const response=await request('/api/session',{credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});
+ const response=await fetchSession(request);
  if(response.status===401)throw new SignInRequired();
  if(!response.ok)throw new Error('We could not check your sign-in. Please try again.');
  const data=await response.json();
